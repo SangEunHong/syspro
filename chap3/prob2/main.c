@@ -17,6 +17,6 @@ main(){
 		}
 	}
 	if (max > 0)
-		peintf("%s \n", longest);
+		printf("%s \n", longest);
 	return 0;
 }
