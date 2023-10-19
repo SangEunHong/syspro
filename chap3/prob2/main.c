@@ -1,22 +1,32 @@
 #include <stdio.h>
+#include <string.h>
 #include "copy.h"
+char str[MAXLINE][MAXLINE];
+char longest[MAXLINE];
 
-char line[MAXLINE];
+int main() {
+ 
+    int i, j;
+    int count = 0;
+    
+    while(count<5){
+        scanf(" %s", str[count]);
+        count++;
+    }
 
-main(){
-	int len;
-	int max;
-	max = 0;
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4 - i; j++) {
+            if (strlen(str[j]) < strlen(str[j + 1])) {
+                copy(str[j], longest);
+                copy(str[j+1], str[j]);
+                copy(longest, str[j+1]);
+                
+            }
+        }
+    }
+    for (i = 0; i < 5; i++) {
+        printf("%s\n", str[i]);
+    }
 
-	while(gets(line) == 5) {
-		len = strlen(line);
-
-		if (len > max) {
-			max = len;
-			copy(line, longest);
-		}
-	}
-	if (max > 0)
-		printf("%s \n", longest);
-	return 0;
+    return 0;
 }
