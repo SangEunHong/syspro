@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	struct student record;
 	struct flock lock;
 	if (argc < 2) {
-		fprintf(stderr, "How to use: %s File In", argv[0]);
+		fprintf(stderr, "How to use: %s File \n", argv[0]);
 		exit(1);
 	}
 	if ((fd = open(argv[1], O_RDONLY)) == -1) {
@@ -30,9 +30,9 @@ int main(int argc, char *argv[])
 		}
 		lseek(fd, (id-START_ID)*sizeof(record), SEEK_SET);
 		if ((read(fd, (char *) &record, sizeof(record)) > 0) && (record.id != 0)) 
-			printf("Name:%slt StulD:%dlt Score:%dIn", record.name, record.id,
+			printf("Name:%s\t StulD:%d\t Score:%d\n", record.name, record.id,
 record.score);
-		else printf("No record %d In", id);
+		else printf("No record %d \n", id);
 		lock.l_type = F_UNLCK;
 		fcntl(fd,F_SETLK, &lock);
 		printf("InEnter StudentID to search : ");

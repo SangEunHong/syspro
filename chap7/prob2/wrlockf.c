@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	printf("\nEnter StudentID you want to modify : ");
 	while (scanf("%d", &id) == 1) {
 		lseek(fd, (long) (id-START_ID)*sizeof(record), SEEK_SET);
-		if(lock(fd, F_LOCK, sizeof(record)) == -1) {
+		if(lockf(fd, F_LOCK, sizeof(record)) == -1) {
 			perror(argv[1]);
 			exit(3);
 		}
