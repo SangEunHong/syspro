@@ -80,3 +80,35 @@ void printStat(char *pathname, char *file, struct stat *st, int size, int links,
     printf("%.12s ", ctime(&st->st_mtime)+4);
     printf("%s\n", file);
 }
+char type(mode_t mode)
+{
+	if (S_ISREG(mode))
+		return('-');
+	if (S_ISDIR(mode))
+		return('d');
+	if (S_ISCHR(mode))
+		return('c');
+	if (S_ISBLK(mode))
+		return('b');
+	if (S_ISLNK(mode))
+		return('l');
+	if (S_ISFIFO(mode))
+		return('p');
+	if (S_ISSOCK(mode))
+		return('s');
+}
+char* perm(mode_t mode)
+{
+	static char perms[10];
+	strcpy(perms, "--------");
+
+    	for (int i=0; i<3;i++){
+		if (mode & (S_IRUSR >> i*3))
+			perms[i*3] = 'r';
+             	if (mode & (S_IWUSR >> i*3))
+                    	perms[i*3 +1] = 'w';
+            	if (mode & (S_IXUSR >> i*3))
+                    	perms[i*3 + 2] = 'x';
+    }
+    return(perms);
+}
